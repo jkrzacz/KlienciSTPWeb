@@ -7,5 +7,6 @@ namespace KlienciSTP.Interfaces
     {
         List<User> GetUsers();
         void CreateUser(User user);
+        void DeleteUser(int idUser);
     }
 }

@@ -60,5 +60,11 @@ namespace KlienciSTP.Web.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public ActionResult Delete(int id)
+        {
+            _userService.DeleteUser(id);
+            return RedirectToAction("Index");
+        }
     }
 }

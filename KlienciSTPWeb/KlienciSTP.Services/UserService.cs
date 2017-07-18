@@ -10,7 +10,7 @@ namespace KlienciSTP.Services
     {
         public List<User> GetUsers()
         {
-            return _dbContext.User.ToList();
+            return _dbContext.User.Where(u => u.Deleted == null).ToList();
         }
 
         public void CreateUser(User user)
@@ -18,6 +18,16 @@ namespace KlienciSTP.Services
             user.Created = DateTime.Now;
             _dbContext.User.Add(user);
             _dbContext.SaveChanges();
+        }
+
+        public void DeleteUser(int idUser)
+        {
+            var user = _dbContext.User.FirstOrDefault(u => u.Deleted == null && u.Id == idUser);
+            if (user != null)
+            {
+                user.Deleted = DateTime.Now;
+                _dbContext.SaveChanges();
+            }
         }
     }
 }
