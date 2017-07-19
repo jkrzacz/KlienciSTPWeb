@@ -16,8 +16,10 @@ namespace KlienciSTP.Web.Models
             Phone1 = user.Phone1;
             Phone2 = user.Phone2;
             Email = user.Email;
+            Created = user.Created;
         }
 
+        [DisplayName("Indeks")]
         public int Id { get; set; }
 
         [Required]
@@ -36,7 +38,9 @@ namespace KlienciSTP.Web.Models
 
         [DisplayName("Pomocniczy numer telefonu")]
         public string Phone2 { get; set; }
-
+        [DisplayName("Email")]
         public string Email { get; set; }
+        [DisplayName("DataUtworzenia")]
+        public System.DateTime? Created { get; set; }
     }
 }

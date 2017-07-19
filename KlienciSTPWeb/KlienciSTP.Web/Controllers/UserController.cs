@@ -39,6 +39,18 @@ namespace KlienciSTP.Web.Controllers
             return View();
         }
 
+        public ActionResult Details(int id)
+        {
+            var i = new UserViewModel(_userService.GetUser(id));
+            return View(i);
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var i = new UserViewModel(_userService.GetUser(id));
+            return View(i);
+        }
+
         [HttpPost]
         public ActionResult Create(UserViewModel model)
         {
@@ -57,6 +69,28 @@ namespace KlienciSTP.Web.Controllers
             };
 
             _userService.CreateUser(user);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Edit(UserViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var user = new User()
+            {
+                Id = model.Id,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Phone1 = model.Phone1,
+                Phone2 = model.Phone2,
+                Email = model.Email,
+            };
+            _userService.EditUser(user);
 
             return RedirectToAction("Index");
         }

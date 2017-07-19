@@ -1,0 +1,72 @@
+﻿@model KlienciSTP.Web.Models.UserViewModel
+@{
+    ViewBag.Title = "Dane klienta";
+}
+
+<h2>Dane klienta</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => Model.Id)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => Model.Id)
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => Model.FirstName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => Model.FirstName)
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => Model.LastName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => Model.LastName)
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => Model.Phone1)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => Model.Phone1)
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => Model.Phone2)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => Model.Phone2)
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => Model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => Model.Email)
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => Model.Created)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => Model.Created)
+        </dd>
+    </dl>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
