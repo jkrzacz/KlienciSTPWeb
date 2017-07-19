@@ -19,28 +19,34 @@ namespace KlienciSTP.Web.Models
             Created = user.Created;
         }
 
-        [DisplayName("Indeks")]
+        [DisplayName("Identyfikator")]
         public int Id { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [StringLength(30)]
         [DisplayName("Imię")]
         public string FirstName { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [StringLength(30)]
         [DisplayName("Nazwisko")]
         public string LastName { get; set; }
 
         [Required]
+        [StringLength(14)]
         [DisplayName("Numer telefonu")]
         public string Phone1 { get; set; }
 
+        [StringLength(14)]
         [DisplayName("Pomocniczy numer telefonu")]
         public string Phone2 { get; set; }
+
         [DisplayName("Email")]
+        [StringLength(50)]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
-        [DisplayName("DataUtworzenia")]
+
+        [DisplayName("Data Utworzenia")]
         public System.DateTime? Created { get; set; }
     }
 }

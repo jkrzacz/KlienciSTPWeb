@@ -13,11 +13,14 @@ namespace KlienciSTP.Web.Controllers
     public class UserController : Controller
     {
         private readonly IUserService _userService;
+        private readonly ICarService _carService;
 
         public UserController()
         {
             _userService = new UserService();
+            _carService = new CarService();
         }
+
 
         // GET: User
         public ActionResult Index()
@@ -37,18 +40,6 @@ namespace KlienciSTP.Web.Controllers
         public ActionResult Create()
         {
             return View();
-        }
-
-        public ActionResult Details(int id)
-        {
-            var i = new UserViewModel(_userService.GetUser(id));
-            return View(i);
-        }
-
-        public ActionResult Edit(int id)
-        {
-            var i = new UserViewModel(_userService.GetUser(id));
-            return View(i);
         }
 
         [HttpPost]
@@ -71,6 +62,30 @@ namespace KlienciSTP.Web.Controllers
             _userService.CreateUser(user);
 
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Details(int id)
+        {
+            var userModel = new UserViewModel(_userService.GetUser(id));
+            var carsModel = new List<CarViewModel>();
+            var carList = _carService.GetCarsForUser(userModel.Id);
+
+            foreach (var car in carList)
+            {
+                var model = new CarViewModel(car);
+                carsModel.Add(model);
+            }
+            var userWithCarViewModel = new UserWithCarViewModel() {
+                User = userModel,
+                Cars = carsModel
+            };
+            return View(userWithCarViewModel);
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var userViewModel = new UserViewModel(_userService.GetUser(id));
+            return View(userViewModel);
         }
 
         [HttpPost]

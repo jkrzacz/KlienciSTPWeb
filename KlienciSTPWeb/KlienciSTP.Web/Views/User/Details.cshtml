@@ -1,72 +1,109 @@
-﻿@model KlienciSTP.Web.Models.UserViewModel
+﻿@model KlienciSTP.Web.Models.UserWithCarViewModel
 @{
     ViewBag.Title = "Dane klienta";
 }
 
 <h2>Dane klienta</h2>
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
+<div>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => Model.Id)
+            @Html.DisplayNameFor(model => model.User.Id)
         </dt>
         <dd>
-            @Html.DisplayFor(model => Model.Id)
+            @Html.DisplayFor(model => model.User.Id)
         </dd>
-    </dl>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => Model.FirstName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => Model.FirstName)
-        </dd>
-    </dl>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => Model.LastName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => Model.LastName)
-        </dd>
-    </dl>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => Model.Phone1)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => Model.Phone1)
-        </dd>
-    </dl>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => Model.Phone2)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => Model.Phone2)
-        </dd>
-    </dl>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => Model.Email)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => Model.Email)
-        </dd>
-    </dl>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => Model.Created)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => Model.Created)
-        </dd>
-    </dl>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+        <dt>
+            @Html.DisplayNameFor(model => model.User.FirstName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.LastName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Phone1)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.Phone1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Phone2)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.Phone2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Created)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.Created)
+        </dd>
+    </dl>
 </div>
+<p>
+    @Html.ActionLink("Edycja", "Edit", new { id = Model.User.Id }) |
+    @Html.ActionLink("Powrót", "Index")
+</p>
+<p>
+    @Html.ActionLink("Dodaj Samochód", "Create", "Car", new { userId = Model.User.Id }, null)
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Cars[0].Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cars[0].Make)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cars[0].Model)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cars[0].RegistrationNumber)
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model.Cars)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Make)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegistrationNumber)
+            </td>
+            <td>
+                @Html.ActionLink("Edycja", "Edit","Car", new { id = item.Id },null) |
+                @Html.ActionLink("Szczegóły", "Details", "Car", new { id = item.Id }, null) |
+                @Html.ActionLink("Usuń", "Delete", "Car", item, null)
+            </td>
+        </tr>
+    }
+</table>
+<p>
+@Html.ActionLink("Powrót", "Index")
+</p>
