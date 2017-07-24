@@ -42,7 +42,6 @@ namespace KlienciSTP.Services
             var car = _dbContext.Car.FirstOrDefault(u => u.Deleted == null && u.Id == dane.Id);
             if (car != null)
             {
-                car.UserId = dane.UserId;
                 car.Make = dane.Make;
                 car.Model = dane.Model;
                 car.RegistrationNumber = dane.RegistrationNumber;

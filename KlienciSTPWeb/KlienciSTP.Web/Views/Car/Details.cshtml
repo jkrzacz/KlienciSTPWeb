@@ -44,6 +44,9 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edycja", "Edit", new { id = Model.Id }) |
+    <input type="button" value="Edycja" class="btn btn-default" onclick="location.href='@Url.Action("Edit", new { id = Model.Id })'" />
+</p>
+<hr />
+<p>
     @Html.ActionLink("Powrót", "Details", "User", new { id = Model.UserId }, null)
 </p>

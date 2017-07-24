@@ -9,5 +9,6 @@ namespace KlienciSTP.Web.Models
     {
         public UserViewModel User { get; set; }
         public List<CarViewModel> Cars { get; set; }
+        public List<InspectionViewModel> Inspections { get; set; }
     }
 }

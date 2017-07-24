@@ -14,11 +14,13 @@ namespace KlienciSTP.Web.Controllers
     {
         private readonly IUserService _userService;
         private readonly ICarService _carService;
+        private readonly IInspectionService _inspectionService;
 
         public UserController()
         {
             _userService = new UserService();
             _carService = new CarService();
+            _inspectionService = new InspectionService();
         }
 
 
@@ -68,16 +70,24 @@ namespace KlienciSTP.Web.Controllers
         {
             var userModel = new UserViewModel(_userService.GetUser(id));
             var carsModel = new List<CarViewModel>();
+            var inspectionsModel = new List<InspectionViewModel>();
             var carList = _carService.GetCarsForUser(userModel.Id);
+            var inspectionList = _inspectionService.GetInspectionsForUser(userModel.Id);
 
             foreach (var car in carList)
             {
                 var model = new CarViewModel(car);
                 carsModel.Add(model);
             }
+            foreach (var inspection in inspectionList)
+            {
+                var model = new InspectionViewModel(inspection,id);
+                inspectionsModel.Add(model);
+            }
             var userWithCarViewModel = new UserWithCarViewModel() {
                 User = userModel,
-                Cars = carsModel
+                Cars = carsModel,
+                Inspections = inspectionsModel
             };
             return View(userWithCarViewModel);
         }

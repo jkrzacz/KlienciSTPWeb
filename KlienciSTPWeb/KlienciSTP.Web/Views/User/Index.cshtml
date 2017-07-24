@@ -5,9 +5,9 @@
 }
 
 <h2>Lista klientów</h2>
-
+<hr />
 <p>
-    @Html.ActionLink("Stworzyć nowy", "Create")
+    <input type="button" value="Stworzyć nowy" class="btn btn-default" onclick="location.href='@Url.Action("Create")'" />
 </p>
 <table class="table">
     <tr>
@@ -46,12 +46,11 @@
         <td>
             @Html.DisplayFor(modelItem => item.Email)
         </td>
-        <td>
-            @Html.ActionLink("Edycja", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Szczegóły", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Usuń", "Delete", new { id=item.Id })
+        <td >
+            <input type="button" value="Edycja" class="btn btn-default" onclick="location.href='@Url.Action("Edit", new { id=item.Id })'" />
+            <input type="button" value="Szczegóły" class="btn btn-default" onclick="location.href='@Url.Action("Details", new { id=item.Id })'" />
+            <input type="button" value="Usuń" class="btn btn-default" onclick="location.href='@Url.Action("Delete", new { id=item.Id })'" />
         </td>
     </tr>
 }
-
 </table>

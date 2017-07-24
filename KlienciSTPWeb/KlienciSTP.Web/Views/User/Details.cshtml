@@ -4,8 +4,8 @@
 }
 
 <h2>Dane klienta</h2>
-
-<div>
+@Html.HiddenFor(modelItem => Model.User.Id)
+<div> 
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -59,51 +59,115 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edycja", "Edit", new { id = Model.User.Id }) |
+    <input type="button" value="Edycja klienta" class="btn btn-default" onclick="location.href='@Url.Action("Edit", new { id = Model.User.Id })'" />
     @Html.ActionLink("Powrót", "Index")
 </p>
+<hr />
+<h2>Samochody klienta</h2>
+<hr />
 <p>
-    @Html.ActionLink("Dodaj Samochód", "Create", "Car", new { userId = Model.User.Id }, null)
+    <input type="button" value="Dodaj Samochód" class="btn btn-default" onclick="location.href='@Url.Action("Create", "Car", new { userId = Model.User.Id })'" />
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Cars[0].Id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cars[0].Make)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cars[0].Model)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cars[0].RegistrationNumber)
-        </th>
-        <th></th>
-    </tr>
-    @foreach (var item in Model.Cars)
+@if (Model.Cars.Count > 0)
+{
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cars[0].Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cars[0].Make)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cars[0].Model)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cars[0].RegistrationNumber)
+                </th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model.Cars)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Make)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Model)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RegistrationNumber)
+                    </td>
+                    <td>
+                        <input type="button" value="Edycja" class="btn btn-default" onclick="location.href='@Url.Action("Edit","Car", new { id = item.Id })'" />
+                        <input type="button" value="Szczegóły" class="btn btn-default" onclick="location.href='@Url.Action("Details", "Car", new { id = item.Id })'" />
+                        <input type="button" value="Usuń" class="btn btn-default" onclick="location.href='@Url.Action("Delete", "Car", item)'" />
+                    </td>
+                </tr>
+            }
+        </table>
+    <hr />
+    <h2>Przeglądy klienta</h2>
+    <hr />
+
+    <p>
+        <input type="button" value="Dodaj przegląd" class="btn btn-default" onclick="location.href='@Url.Action("Create", "Inspection", new { userId = Model.User.Id })'" />
+    </p>
+    if (Model.Inspections.Count > 0)
     {
+    <table class="table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Make)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Model)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RegistrationNumber)
-            </td>
-            <td>
-                @Html.ActionLink("Edycja", "Edit","Car", new { id = item.Id },null) |
-                @Html.ActionLink("Szczegóły", "Details", "Car", new { id = item.Id }, null) |
-                @Html.ActionLink("Usuń", "Delete", "Car", item, null)
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.Inspections[0].CarId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Inspections[0].InspectionDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Inspections[0].Comments)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Inspections[0].NextInspectionYears)
+            </th>
+            <th></th>
         </tr>
+        @foreach (var item in Model.Inspections)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CarId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InspectionDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comments)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NextInspectionYears)
+                </td>
+                <td>
+                    <input type="button" value="Edycja" class="btn btn-default" onclick="location.href='@Url.Action("Edit","Inspection", new { userId = item.UserId, id = item.Id })'" />
+                    <input type="button" value="Usuń" class="btn btn-default" onclick="location.href='@Url.Action("Delete", "Inspection", item)'" />
+                </td>
+            </tr>
+        }
+    </table>
     }
-</table>
+    else
+    {
+    <h3>Użytkownik nie ma przypisanych przeglądów</h3>
+    }
+}
+else
+{
+    <h3>Użytkownik nie ma przypisanych samochodów</h3>
+}
+<hr />
 <p>
 @Html.ActionLink("Powrót", "Index")
 </p>
+
