@@ -150,7 +150,7 @@
                     @Html.DisplayFor(modelItem => item.NextInspectionYears)
                 </td>
                 <td>
-                    <input type="button" value="Edycja" class="btn btn-default" onclick="location.href='@Url.Action("Edit","Inspection", new { userId = item.UserId, id = item.Id })'" />
+                    <input type="button" value="Edycja" class="btn btn-default" onclick="location.href='@Url.Action("Edit","Inspection", new { id = item.Id, userId = item.UserId })'" />
                     <input type="button" value="Usuń" class="btn btn-default" onclick="location.href='@Url.Action("Delete", "Inspection", item)'" />
                 </td>
             </tr>

@@ -171,12 +171,14 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\FutureInspectionsViewModel.cs" />
     <Compile Include="Models\InspectionViewModel.cs" />
     <Compile Include="Models\CarViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\InspectionWithCarsModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\UserViewModel.cs" />
+    <Compile Include="Models\UserWithCarRowViewModel.cs" />
     <Compile Include="Models\UserWithCarViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -259,6 +261,11 @@
     <Content Include="Views\Car\Edit.cshtml" />
     <Content Include="Views\Inspection\Edit.cshtml" />
     <Content Include="Views\Inspection\Create.cshtml" />
+    <Content Include="Views\Inspection\FutureInspections.cshtml" />
+    <Content Include="Views\Inspection\ClientInspections.cshtml" />
+    <Content Include="Views\Inspection\History.cshtml" />
+    <Content Include="Views\Inspection\EditForHistory.cshtml" />
+    <Content Include="Views\Inspection\InspectionsHistory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

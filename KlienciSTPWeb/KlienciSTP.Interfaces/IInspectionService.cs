@@ -20,5 +20,9 @@ namespace KlienciSTP.Interfaces
         void EditInspection(Inspection dane);
 
         List<Inspection> GetInspectionsForUser(int userId);
+        List<Inspection> GetFutureInspections();
+        List<Inspection> GetHistoryInspections();
+        List<Inspection> GetFutureInspectionsForCar(int carId);
+        void makeNotification(int id);
     }
 }

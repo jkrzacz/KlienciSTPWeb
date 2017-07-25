@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<KlienciSTP.Web.Models.UserWithCarRowViewModel>
+@{
     ViewBag.Title = "Strona główna";
 }
 
@@ -6,12 +7,57 @@
     <h1>STP</h1>
     <p class="lead">System do zarządzania przypomnieniami przeglądów w stacji kontroli pojazdów. Wybierz akcję:</p>
     <p><a href="@Url.Action("Index", "User")" class="btn btn-primary btn-lg">Zarządzaj klientami &raquo;</a></p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Zarządzaj przeglądami &raquo;</a></p>
+    <p><a href="@Url.Action("FutureInspections", "Inspection")" class="btn btn-primary btn-lg">Wyświetl najbliższe przeglądy &raquo;</a></p>
+    <p><a href="@Url.Action("InspectionsHistory", "Inspection")" class="btn btn-primary btn-lg">Historia powiadomień &raquo;</a></p>
 </div>
 
 <div class="row">
 
-    Tutaj wyświetl najbliższe przeglądy
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Make)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RegistrationNumber)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Make)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Model)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegistrationNumber)
+                </td>
+                <td>
+                    <input type="button" value="Planowane przeglądy klienta" class="btn btn-default" onclick="location.href='@Url.Action("ClientInspections", "Inspection", new { carId = item.CarId })'" />
+                    <input type="button" value="Historia przeglądów" class="btn btn-default" onclick="location.href='@Url.Action("History", "Inspection", new { carId = item.CarId, userId = item.UserId})'" />
+                </td>
+            </tr>
+        }
+    </table>
     
 
 </div>

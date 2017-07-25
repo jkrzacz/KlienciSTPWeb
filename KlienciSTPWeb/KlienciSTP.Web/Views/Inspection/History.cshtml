@@ -1,0 +1,43 @@
+﻿@model IEnumerable<KlienciSTP.Web.Models.InspectionViewModel>
+@{
+    ViewBag.Title = "History";
+}
+
+<h2>History</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.InspectionDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comments)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NextInspectionYears)
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.InspectionDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comments)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NextInspectionYears)
+            </td>
+            <td>
+                <input type="button" value="Edycja" class="btn btn-default" onclick="location.href='@Url.Action("EditForHistory", "Inspection", new { userId = item.UserId, id = item.Id, carId = item.CarId })'" />
+                <input type="button" value="Usuń" class="btn btn-default" onclick="location.href='@Url.Action("DeleteForHistory", "Inspection", item)'" />
+            </td>
+        </tr>
+    }
+</table>
+<hr />
+<p>
+    @Html.ActionLink("Powrót", "Index","Home")
+</p>
+

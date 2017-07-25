@@ -13,7 +13,7 @@ namespace KlienciSTP.Services
         public List<Inspection> GetInspectionsForCar(int carId)
         {
             return _dbContext.Inspection.Where(u => u.Deleted == null && u.CarId == carId).ToList();
-        }
+        }       
 
         public Inspection GetInspection(int id)
         {
@@ -42,7 +42,10 @@ namespace KlienciSTP.Services
             var inspection = _dbContext.Inspection.FirstOrDefault(u => u.Deleted == null && u.Id == dane.Id);
             if (inspection != null)
             {
-                inspection.CarId = dane.CarId;
+                if (dane.CarId > 0)
+                {
+                    inspection.CarId = dane.CarId;
+                }
                 inspection.InspectionDate = dane.InspectionDate;
                 inspection.Comments = dane.Comments;
                 inspection.NextInspectionYears = dane.NextInspectionYears;
@@ -59,6 +62,33 @@ namespace KlienciSTP.Services
                 inspectionList.AddRange(GetInspectionsForCar(element.Id));
             }
             return inspectionList;
+        }
+        public List<Inspection> GetFutureInspections()
+        {
+            int notificationPeriod = 14;
+            var notDeletedNotification = _dbContext.Inspection.Where(u => u.Deleted == null && u.Notified == null).ToList();
+            var futureNotification = notDeletedNotification.Where(u => u.InspectionDate.AddYears(u.NextInspectionYears).AddDays(-1 * notificationPeriod) <= DateTime.Today).ToList();
+            return futureNotification;
+        }
+        public List<Inspection> GetHistoryInspections()
+        {
+            var notifiedNotifications = _dbContext.Inspection.Where(u => u.Deleted == null && u.Notified != null).ToList();
+            return notifiedNotifications;
+        }
+
+        public List<Inspection> GetFutureInspectionsForCar(int carId2)
+        {
+            var notDeletedNotification = _dbContext.Inspection.Where(u => u.Deleted == null && u.Notified == null && u.CarId == carId2).ToList();
+            return notDeletedNotification;
+        }
+        public void makeNotification(int idInspection)
+        {
+            var inspection = _dbContext.Inspection.FirstOrDefault(u => u.Deleted == null && u.Id == idInspection);
+            if (inspection != null)
+            {
+                inspection.Notified = DateTime.Now;
+                _dbContext.SaveChanges();
+            }
         }
     }
 }

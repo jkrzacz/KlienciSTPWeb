@@ -1,0 +1,68 @@
+﻿@model IEnumerable<KlienciSTP.Web.Models.NotificationViewModel>
+
+@{
+    ViewBag.Title = "FutureInspections";
+}
+
+<h2>Lista najbliższych przeglądów</h2>
+<hr />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.InspectionDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Make)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Model)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContactDetails)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RegistrationNumber)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.InspectionDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Make)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactDetails)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegistrationNumber)
+            </td>
+            <td>
+                <input type="button" value="Powiadomiony" class="btn btn-default" onclick="location.href='@Url.Action("MakeNotification", new { id = item.InspectionId , carId = -1})'" />
+            </td>
+        </tr>
+    }
+</table>
+<hr />
+<p>
+    @Html.ActionLink("Powrót", "Index", "Home")
+</p>
