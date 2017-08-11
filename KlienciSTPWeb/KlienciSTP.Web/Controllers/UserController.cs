@@ -41,7 +41,7 @@ namespace KlienciSTP.Web.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            return PartialView("_Create");
         }
 
         [HttpPost]
@@ -49,7 +49,7 @@ namespace KlienciSTP.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return PartialView("_Create", model);
             }
 
             var user = new User()
@@ -63,7 +63,7 @@ namespace KlienciSTP.Web.Controllers
 
             _userService.CreateUser(user);
 
-            return RedirectToAction("Index");
+            return Json(new { success = true });
         }
 
         public ActionResult Details(int id)
@@ -95,7 +95,7 @@ namespace KlienciSTP.Web.Controllers
         public ActionResult Edit(int id)
         {
             var userViewModel = new UserViewModel(_userService.GetUser(id));
-            return View(userViewModel);
+            return PartialView("_Edit", userViewModel);
         }
 
         [HttpPost]
@@ -103,7 +103,7 @@ namespace KlienciSTP.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return PartialView("_Edit", model);
             }
 
             var user = new User()
@@ -117,7 +117,7 @@ namespace KlienciSTP.Web.Controllers
             };
             _userService.EditUser(user);
 
-            return RedirectToAction("Index");
+            return Json(new { success = true });
         }
 
         public ActionResult Delete(int id)

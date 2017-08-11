@@ -30,7 +30,7 @@ namespace KlienciSTP.Web.Controllers
             };
             ViewBag.DropListOfCarsToView = GetCarsListView(cars,-1);
             ViewBag.DropListOfYearsToView = GetNextInspectionYearsListView(1);
-            return View(inspectionViewModel);
+            return PartialView("_Create", inspectionViewModel);
         }
 
 
@@ -42,7 +42,7 @@ namespace KlienciSTP.Web.Controllers
                 var cars = _carService.GetCarsForUser(viewModel.UserId);
                 ViewBag.DropListOfCarsToView = GetCarsListView(cars, -1);
                 ViewBag.DropListOfYearsToView = GetNextInspectionYearsListView(1);
-                return View(viewModel);
+                return PartialView("_Create", viewModel);
             }
 
             var inspection = new Inspection()
@@ -55,7 +55,7 @@ namespace KlienciSTP.Web.Controllers
             };
 
             _inspectionService.CreateInspectionForCar(inspection);
-            return RedirectToAction("Details", "User", new { id = viewModel.UserId });
+            return Json(new { success = true });
         }
 
         public ActionResult Edit(int id, int userId)
@@ -64,7 +64,7 @@ namespace KlienciSTP.Web.Controllers
             var inspectionViewModel = new InspectionViewModel(_inspectionService.GetInspection(id), userId);
             ViewBag.DropListOfCarsToView = GetCarsListView(cars,inspectionViewModel.CarId);
             ViewBag.DropListOfYearsToView = GetNextInspectionYearsListView(inspectionViewModel.NextInspectionYears);
-            return View(inspectionViewModel);
+            return PartialView("_Edit", inspectionViewModel);
         }
 
         [HttpPost]
@@ -76,7 +76,7 @@ namespace KlienciSTP.Web.Controllers
                 var cars = _carService.GetCarsForUser(viewModel.UserId);
                 ViewBag.DropListOfCarsToView = GetCarsListView(cars, viewModel.CarId);
                 ViewBag.DropListOfYearsToView = GetNextInspectionYearsListView(viewModel.NextInspectionYears);
-                return View(viewModel);
+                return PartialView("_Edit", viewModel);
             }
 
             var inspection = new Inspection()
@@ -89,39 +89,8 @@ namespace KlienciSTP.Web.Controllers
             };
 
             _inspectionService.EditInspection(inspection);
-            return RedirectToAction("Details", "User", new { id = viewModel.UserId });
+            return Json(new { success = true });
 
-        }
-
-        public ActionResult EditForHistory(int id, int userId, int carId)
-        {
-            var inspectionViewModel = new InspectionViewModel(_inspectionService.GetInspection(id), userId);
-            inspectionViewModel.CarId = carId;
-            ViewBag.DropListOfYearsToView = GetNextInspectionYearsListView(inspectionViewModel.NextInspectionYears);
-            return View(inspectionViewModel);
-        }
-
-        [HttpPost]
-        public ActionResult EditForHistory(InspectionViewModel viewModel)
-        {
-
-            if (!ModelState.IsValid)
-            {
-                ViewBag.DropListOfYearsToView = GetNextInspectionYearsListView(viewModel.NextInspectionYears);
-                return View(viewModel);
-            }
-
-            var inspection = new Inspection()
-            {
-                Id = viewModel.Id,
-                CarId = viewModel.CarId,
-                Comments = viewModel.Comments,
-                InspectionDate = viewModel.InspectionDate,
-                NextInspectionYears = viewModel.NextInspectionYears
-            };
-
-            _inspectionService.EditInspection(inspection);
-            return RedirectToAction("History", "Inspection", new { carId = viewModel.CarId, userId = viewModel.UserId });
         }
 
         public ActionResult Delete(InspectionViewModel inspection)

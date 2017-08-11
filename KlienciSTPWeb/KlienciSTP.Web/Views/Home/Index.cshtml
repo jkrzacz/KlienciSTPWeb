@@ -11,6 +11,9 @@
     <p><a href="@Url.Action("InspectionsHistory", "Inspection")" class="btn btn-primary btn-lg">Historia powiadomień &raquo;</a></p>
 </div>
 
+@if (Model.Count() > 0)
+{
+
 <div class="row">
 
     <table class="table">
@@ -53,7 +56,7 @@
                 </td>
                 <td>
                     <input type="button" value="Planowane przeglądy klienta" class="btn btn-default" onclick="location.href='@Url.Action("ClientInspections", "Inspection", new { carId = item.CarId })'" />
-                    <input type="button" value="Historia przeglądów" class="btn btn-default" onclick="location.href='@Url.Action("History", "Inspection", new { carId = item.CarId, userId = item.UserId})'" />
+                    <input type="button" value="Historia przeglądów" class="btn btn-default" onclick="location.href='@Url.Action("History", "Inspection", new { carId = item.CarId, userId = item.UserId })'" />
                 </td>
             </tr>
         }
@@ -61,3 +64,8 @@
     
 
 </div>
+}
+else
+{
+    <h3>Brak klientów z samochodami</h3>
+}

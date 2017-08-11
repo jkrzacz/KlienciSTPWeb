@@ -1,9 +1,5 @@
 ﻿@model KlienciSTP.Web.Models.UserViewModel
 
-@{
-    ViewBag.Title = "Edycja klienta";
-}
-
 <h2>Edycja klienta</h2>
 <hr />
 @using (Html.BeginForm()) 
@@ -57,12 +53,8 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Edycja" class="btn btn-default" />
-                <input type="button" value="Anuluj" class="btn btn-default" onclick="location.href='@Url.Action("Index", "User")'" />
+                <input type="button" value="Anuluj" class="btn btn-default" data-dismiss="modal" aria-hidden="true" />
             </div>
         </div>
     </div>
 }
-<hr />
-<div>
-    @Html.ActionLink("Powrót", "Index")
-</div>

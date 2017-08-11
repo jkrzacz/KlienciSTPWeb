@@ -3,6 +3,15 @@
     ViewBag.Title = "History";
 }
 
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
 <h2>History</h2>
 <table class="table">
     <tr>
@@ -30,7 +39,7 @@
                 @Html.DisplayFor(modelItem => item.NextInspectionYears)
             </td>
             <td>
-                <input type="button" value="Edycja" class="btn btn-default" onclick="location.href='@Url.Action("EditForHistory", "Inspection", new { userId = item.UserId, id = item.Id, carId = item.CarId })'" />
+                @Html.ActionLink("Edycja", "Edit", "Inspection", new { id = item.Id, userId = item.UserId }, new { data_modal = "", @class = "btn btn-default" })
                 <input type="button" value="Usuń" class="btn btn-default" onclick="location.href='@Url.Action("DeleteForHistory", "Inspection", item)'" />
             </td>
         </tr>
@@ -41,3 +50,7 @@
     @Html.ActionLink("Powrót", "Index","Home")
 </p>
 
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/popUp")
+}

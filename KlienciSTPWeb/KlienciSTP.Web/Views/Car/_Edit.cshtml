@@ -1,9 +1,5 @@
 ﻿@model KlienciSTP.Web.Models.CarViewModel
 
-@{
-    ViewBag.Title = "Edycja Samochodu";
-}
-
 <h2>Edycja Samochodu</h2>
 <hr />
 @using (Html.BeginForm())
@@ -45,12 +41,8 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Zapisz" class="btn btn-default" />
-                <input type="button" value="Anuluj" class="btn btn-default" onclick="location.href='@Url.Action("Details", "User", new { id = Model.UserId })'" />
+                <input type="button" value="Anuluj" class="btn btn-default" data-dismiss="modal" aria-hidden="true" />
             </div>
         </div>
     </div>
 }
-<hr />
-<div>
-   @Html.ActionLink("Powrót", "Details", "User", new { id = Model.UserId }, null)
-</div>

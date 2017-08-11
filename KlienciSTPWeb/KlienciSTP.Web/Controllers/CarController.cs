@@ -23,7 +23,7 @@ namespace KlienciSTP.Web.Controllers
         public ActionResult Create(int userId)
         {
             var carViewModel = new CarViewModel() {  UserId = userId };
-            return View(carViewModel);
+            return PartialView("_Create", carViewModel);
         }
 
 
@@ -32,7 +32,7 @@ namespace KlienciSTP.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(viewModel);
+                return PartialView("_Create", viewModel);
             }
 
             var car = new Car()
@@ -45,19 +45,19 @@ namespace KlienciSTP.Web.Controllers
             };
 
             _carService.CreateCarForUser(car);
-            return RedirectToAction("Details", "User", new { id = viewModel.UserId });
+            return Json(new { success = true });
         }
 
         public ActionResult Details(int id)
         {
             var carViewModel = new CarViewModel(_carService.GetCar(id));
-            return View(carViewModel);
+            return PartialView("_Details", carViewModel);
         }
 
         public ActionResult Edit(int id)
         {
             var carViewModel = new CarViewModel(_carService.GetCar(id));
-            return View(carViewModel);
+            return PartialView("_Edit", carViewModel);
         }
 
         [HttpPost]
@@ -65,7 +65,7 @@ namespace KlienciSTP.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(viewModel);
+                return PartialView("_Edit", viewModel);
             }
 
             var car = new Car()
@@ -78,7 +78,7 @@ namespace KlienciSTP.Web.Controllers
             };
             _carService.EditUser(car);
 
-            return RedirectToAction("Details", "User", new { id = car.UserId });
+            return Json(new { success = true });
         }
 
         public ActionResult Delete(CarViewModel car)

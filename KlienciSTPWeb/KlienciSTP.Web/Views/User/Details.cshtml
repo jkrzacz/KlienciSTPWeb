@@ -3,6 +3,15 @@
     ViewBag.Title = "Dane klienta";
 }
 
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
 <h2>Dane klienta</h2>
 @Html.HiddenFor(modelItem => Model.User.Id)
 <div> 
@@ -59,14 +68,14 @@
     </dl>
 </div>
 <p>
-    <input type="button" value="Edycja klienta" class="btn btn-default" onclick="location.href='@Url.Action("Edit", new { id = Model.User.Id })'" />
+    @Html.ActionLink("Edycja klienta", "Edit", "User", new { id = Model.User.Id }, new { data_modal = "", @class = "btn btn-default" })
     @Html.ActionLink("Powrót", "Index")
 </p>
 <hr />
 <h2>Samochody klienta</h2>
 <hr />
 <p>
-    <input type="button" value="Dodaj Samochód" class="btn btn-default" onclick="location.href='@Url.Action("Create", "Car", new { userId = Model.User.Id })'" />
+    @Html.ActionLink("Dodaj Samochód", "Create", "Car", new { userId = Model.User.Id }, new { data_modal = "", @class = "btn btn-default" })
 </p>
 @if (Model.Cars.Count > 0)
 {
@@ -102,8 +111,8 @@
                         @Html.DisplayFor(modelItem => item.RegistrationNumber)
                     </td>
                     <td>
-                        <input type="button" value="Edycja" class="btn btn-default" onclick="location.href='@Url.Action("Edit","Car", new { id = item.Id })'" />
-                        <input type="button" value="Szczegóły" class="btn btn-default" onclick="location.href='@Url.Action("Details", "Car", new { id = item.Id })'" />
+                        @Html.ActionLink("Edycja", "Edit", "Car", new { id = item.Id }, new { data_modal = "", @class = "btn btn-default" })
+                        @Html.ActionLink("Szczegóły", "Details", "Car", new { id = item.Id }, new { data_modal = "", @class = "btn btn-default" })
                         <input type="button" value="Usuń" class="btn btn-default" onclick="location.href='@Url.Action("Delete", "Car", item)'" />
                     </td>
                 </tr>
@@ -114,7 +123,7 @@
     <hr />
 
     <p>
-        <input type="button" value="Dodaj przegląd" class="btn btn-default" onclick="location.href='@Url.Action("Create", "Inspection", new { userId = Model.User.Id })'" />
+        @Html.ActionLink("Dodaj przegląd", "Create", "Inspection", new { userId = Model.User.Id }, new { data_modal = "", @class = "btn btn-default" })
     </p>
     if (Model.Inspections.Count > 0)
     {
@@ -150,7 +159,7 @@
                     @Html.DisplayFor(modelItem => item.NextInspectionYears)
                 </td>
                 <td>
-                    <input type="button" value="Edycja" class="btn btn-default" onclick="location.href='@Url.Action("Edit","Inspection", new { id = item.Id, userId = item.UserId })'" />
+                    @Html.ActionLink("Edycja", "Edit", "Inspection", new { id = item.Id, userId = item.UserId }, new { data_modal = "", @class = "btn btn-default" })
                     <input type="button" value="Usuń" class="btn btn-default" onclick="location.href='@Url.Action("Delete", "Inspection", item)'" />
                 </td>
             </tr>
@@ -171,3 +180,7 @@ else
 @Html.ActionLink("Powrót", "Index")
 </p>
 
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/popUp")
+}

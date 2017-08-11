@@ -215,6 +215,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\App\popUp.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -253,18 +254,17 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
-    <Content Include="Views\User\Create.cshtml" />
+    <Content Include="Views\User\_Create.cshtml" />
     <Content Include="Views\User\Details.cshtml" />
-    <Content Include="Views\User\Edit.cshtml" />
-    <Content Include="Views\Car\Create.cshtml" />
-    <Content Include="Views\Car\Details.cshtml" />
-    <Content Include="Views\Car\Edit.cshtml" />
-    <Content Include="Views\Inspection\Edit.cshtml" />
-    <Content Include="Views\Inspection\Create.cshtml" />
+    <Content Include="Views\User\_Edit.cshtml" />
+    <Content Include="Views\Car\_Create.cshtml" />
+    <Content Include="Views\Car\_Details.cshtml" />
+    <Content Include="Views\Car\_Edit.cshtml" />
+    <Content Include="Views\Inspection\_Edit.cshtml" />
+    <Content Include="Views\Inspection\_Create.cshtml" />
     <Content Include="Views\Inspection\FutureInspections.cshtml" />
     <Content Include="Views\Inspection\ClientInspections.cshtml" />
     <Content Include="Views\Inspection\History.cshtml" />
-    <Content Include="Views\Inspection\EditForHistory.cshtml" />
     <Content Include="Views\Inspection\InspectionsHistory.cshtml" />
   </ItemGroup>
   <ItemGroup>

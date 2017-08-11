@@ -1,9 +1,5 @@
 ﻿@model KlienciSTP.Web.Models.CarViewModel
 
-@{
-    ViewBag.Title = "Dane Samochodu";
-}
-
 <h2>Dane Samochodu</h2>
 
 <div>
@@ -44,9 +40,5 @@
     </dl>
 </div>
 <p>
-    <input type="button" value="Edycja" class="btn btn-default" onclick="location.href='@Url.Action("Edit", new { id = Model.Id })'" />
-</p>
-<hr />
-<p>
-    @Html.ActionLink("Powrót", "Details", "User", new { id = Model.UserId }, null)
+    <input type="button" value="Powrót" class="btn btn-default" data-dismiss="modal" aria-hidden="true" />
 </p>
