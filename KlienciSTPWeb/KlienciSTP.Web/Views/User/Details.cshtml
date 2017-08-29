@@ -77,21 +77,64 @@
 <p>
     @Html.ActionLink("Dodaj Samochód", "Create", "Car", new { userId = Model.User.Id }, new { data_modal = "", @class = "btn btn-default" })
 </p>
+@using (Html.BeginForm())
+{
+    <p>
+        Szukaj: @Html.TextBox("carSearchString")
+        <input type="submit" value="Szukaj" />
+    </p>
+}
 @if (Model.Cars.Count > 0)
 {
         <table class="table">
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Cars[0].Id)
+                    @Html.ActionLink("Identyfikator", "Details",
+                new { id = Model.User.Id, carSortOrder = ViewBag.CarIdSortParm })
+                    @if (ViewBag.CarSortOrder == null)
+                    {
+                        <span class="glyphicon glyphicon-sort-by-attributes"></span>
+                    }
+                    else if (ViewBag.CarSortOrder == "Id_desc")
+                    {
+                        <span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
+                    }
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Cars[0].Make)
+                    @Html.ActionLink("Marka", "Details",
+                new { id = Model.User.Id, carSortOrder = ViewBag.CarMakeSortParm })
+                    @if (ViewBag.CarSortOrder == "Make")
+                    {
+                        <span class="glyphicon glyphicon-sort-by-attributes"></span>
+                    }
+                    else if (ViewBag.CarSortOrder == "Make_desc")
+                    {
+                        <span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
+                    }
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Cars[0].Model)
+                    @Html.ActionLink("Model", "Details",
+                new { id = Model.User.Id, carSortOrder = ViewBag.CarModelSortParm })
+                    @if (ViewBag.CarSortOrder == "Model")
+                    {
+                        <span class="glyphicon glyphicon-sort-by-attributes"></span>
+                    }
+                    else if (ViewBag.CarSortOrder == "Model_desc")
+                    {
+                        <span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
+                    }
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Cars[0].RegistrationNumber)
+                    @Html.ActionLink("Numer Rejestracyjny", "Details",
+                new { id = Model.User.Id, carSortOrder = ViewBag.CarRegistrationNumberSortParm })
+                    @if (ViewBag.CarSortOrder == "RegistrationNumber")
+                    {
+                        <span class="glyphicon glyphicon-sort-by-attributes"></span>
+                    }
+                    else if (ViewBag.CarSortOrder == "RegistrationNumber_desc")
+                    {
+                        <span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
+                    }
                 </th>
                 <th></th>
             </tr>
@@ -125,21 +168,64 @@
     <p>
         @Html.ActionLink("Dodaj przegląd", "Create", "Inspection", new { userId = Model.User.Id }, new { data_modal = "", @class = "btn btn-default" })
     </p>
+    using (Html.BeginForm())
+    {
+        <p>
+            Szukaj: @Html.TextBox("inspectionSearchString")
+            <input type="submit" value="Szukaj" />
+        </p>
+    }
     if (Model.Inspections.Count > 0)
     {
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Inspections[0].CarId)
+                @Html.ActionLink("Id Samochodu", "Details",
+                new { id = Model.User.Id, inspectionSortOrder = ViewBag.InspectionCarIdSortParm })
+                @if (ViewBag.InspectionSortOrder == null)
+                {
+                    <span class="glyphicon glyphicon-sort-by-attributes"></span>
+                }
+                else if (ViewBag.InspectionSortOrder == "CarId_desc")
+                {
+                    <span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
+                }
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Inspections[0].InspectionDate)
+                @Html.ActionLink("Data przeglądu", "Details",
+                new { id = Model.User.Id, inspectionSortOrder = ViewBag.InspectionInspectionDateSortParm })
+                @if (ViewBag.InspectionSortOrder == "InspectionDate")
+                    {
+                    <span class="glyphicon glyphicon-sort-by-attributes"></span>
+                }
+                else if (ViewBag.InspectionSortOrder == "InspectionDate_desc")
+                {
+                    <span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
+                }
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Inspections[0].Comments)
+                @Html.ActionLink("Komentarz", "Details",
+                new { id = Model.User.Id, inspectionSortOrder = ViewBag.InspectionCommentsSortParm })
+                @if (ViewBag.InspectionSortOrder == "Comments")
+                    {
+                    <span class="glyphicon glyphicon-sort-by-attributes"></span>
+                }
+                else if (ViewBag.InspectionSortOrder == "Comments_desc")
+                {
+                    <span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
+                }
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Inspections[0].NextInspectionYears)
+                @Html.ActionLink("Okres przeglądu", "Details",
+                new { id = Model.User.Id, inspectionSortOrder = ViewBag.InspectionNextInspectionYearsSortParm })
+                @if (ViewBag.InspectionSortOrder == "NextInspectionYears")
+                    {
+                    <span class="glyphicon glyphicon-sort-by-attributes"></span>
+                }
+                else if (ViewBag.InspectionSortOrder == "NextInspectionYears_desc")
+                {
+                    <span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
+                }
             </th>
             <th></th>
         </tr>
@@ -168,12 +254,12 @@
     }
     else
     {
-    <h3>Użytkownik nie ma przypisanych przeglądów</h3>
+    <h3>Brak przypisanych przeglądów</h3>
     }
 }
 else
 {
-    <h3>Użytkownik nie ma przypisanych samochodów</h3>
+    <h3>Brak przypisanych samochodów</h3>
 }
 <hr />
 <p>

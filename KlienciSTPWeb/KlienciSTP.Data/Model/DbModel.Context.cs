@@ -28,5 +28,9 @@ namespace KlienciSTP.Data.Model
         public virtual DbSet<Car> Car { get; set; }
         public virtual DbSet<Inspection> Inspection { get; set; }
         public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
     }
 }

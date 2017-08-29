@@ -5,28 +5,100 @@
 
 <h2>Planowane przeglądy klienta</h2>
 <hr />
+@using (Html.BeginForm())
+    {
+        <p>
+            Szukaj: @Html.TextBox("SearchString")
+            <input type="submit" value="Szukaj" />
+        </p>
+    }
+@if (Model.Count() > 0)
+{
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.InspectionDate)
+            @Html.ActionLink("Data planowanego przeglądu", "ClientInspections",
+                new { carId = Model.First().CarId, SortOrder = ViewBag.InspectionDateSortParm })
+            @if (ViewBag.SortOrder == null)
+            {
+                <span class="glyphicon glyphicon-sort-by-attributes"></span>
+            }
+            else if (ViewBag.SortOrder == "InspectionDate_desc")
+            {
+                <span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
+            }
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Make)
+            @Html.ActionLink("Marka", "ClientInspections",
+                new { carId = Model.First().CarId, SortOrder = ViewBag.MakeSortParm })
+            @if (ViewBag.SortOrder == "Make")
+            {
+                <span class="glyphicon glyphicon-sort-by-attributes"></span>
+            }
+            else if (ViewBag.SortOrder == "Make_desc")
+            {
+                <span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
+            }
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Model)
+            @Html.ActionLink("Model", "ClientInspections",
+                new { carId = Model.First().CarId, SortOrder = ViewBag.ModelSortParm })
+            @if (ViewBag.SortOrder == "Model")
+            {
+                <span class="glyphicon glyphicon-sort-by-attributes"></span>
+            }
+            else if (ViewBag.SortOrder == "Model_desc")
+            {
+                <span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
+            }
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Customer)
+            @Html.ActionLink("Klient", "ClientInspections",
+                new { carId = Model.First().CarId, SortOrder = ViewBag.CustomerSortParm })
+            @if (ViewBag.SortOrder == "Customer")
+            {
+                <span class="glyphicon glyphicon-sort-by-attributes"></span>
+            }
+            else if (ViewBag.SortOrder == "Customer_desc")
+            {
+                <span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
+            }
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ContactDetails)
+            @Html.ActionLink("Dane kontaktowe", "ClientInspections",
+                new { carId = Model.First().CarId, SortOrder = ViewBag.ContactDetailsSortParm })
+            @if (ViewBag.SortOrder == "ContactDetails")
+            {
+                <span class="glyphicon glyphicon-sort-by-attributes"></span>
+            }
+            else if (ViewBag.SortOrder == "ContactDetails_desc")
+            {
+                <span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
+            }
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Comment)
+            @Html.ActionLink("Komentarz przeglądu", "ClientInspections",
+                new { carId = Model.First().CarId, SortOrder = ViewBag.CommentSortParm })
+            @if (ViewBag.SortOrder == "Comment")
+            {
+                <span class="glyphicon glyphicon-sort-by-attributes"></span>
+            }
+            else if (ViewBag.SortOrder == "Comment_desc")
+            {
+                <span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
+            }
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.RegistrationNumber)
+            @Html.ActionLink("Numer Rejestracyjny", "ClientInspections",
+                new { carId = Model.First().CarId, SortOrder = ViewBag.RegistrationNumberSortParm })
+            @if (ViewBag.SortOrder == "RegistrationNumber")
+            {
+                <span class="glyphicon glyphicon-sort-by-attributes"></span>
+            }
+            else if (ViewBag.SortOrder == "RegistrationNumber_desc")
+            {
+                <span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
+            }
         </th>
         <th></th>
     </tr>
@@ -62,6 +134,11 @@
     }
 </table>
 <hr />
+}
+else
+{
+<h3>Brak przeglądów</h3>
+}
 <p>
     @Html.ActionLink("Powrót", "Index", "Home")
 </p>

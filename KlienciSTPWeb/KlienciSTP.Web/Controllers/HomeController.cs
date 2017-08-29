@@ -19,7 +19,7 @@ namespace KlienciSTP.Web.Controllers
             _userService = new UserService();
             _carService = new CarService();
         }
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string searchString)
         {
             var userList = _userService.GetUsers();
             var usersModel = new List<UserWithCarRowViewModel>();
@@ -43,7 +43,57 @@ namespace KlienciSTP.Web.Controllers
                     }
                 }
             }
-            return View(usersModel);
+            ViewBag.SortOrder = sortOrder;
+            ViewBag.FirstNameSortParm = String.IsNullOrEmpty(sortOrder) ? "FirstName_desc" : "";
+            ViewBag.LastNameSortParm = sortOrder == "LastName" ? "LastName_desc" : "LastName";
+            ViewBag.MakeSortParm = sortOrder == "Make" ? "Make_desc" : "Make";
+            ViewBag.ModelSortParm = sortOrder == "Model" ? "Model_desc" : "Model";
+            ViewBag.RegistrationNumberSortParm = sortOrder == "RegistrationNumber" ? "RegistrationNumber_desc" : "RegistrationNumber";
+
+            var users = from user in usersModel
+                           select user;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                users = users.Where(user => user.FirstName.Contains(searchString)
+                                         || user.LastName.Contains(searchString)
+                                         || user.Make.Contains(searchString)
+                                         || user.Model.Contains(searchString)
+                                         || user.RegistrationNumber.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "FirstName_desc":
+                    users = users.OrderByDescending(user => user.FirstName);
+                    break;
+                case "LastName":
+                    users = users.OrderBy(user => user.LastName);
+                    break;
+                case "LastName_desc":
+                    users = users.OrderByDescending(user => user.LastName);
+                    break;
+                case "Make":
+                    users = users.OrderBy(user => user.Make);
+                    break;
+                case "Make_desc":
+                    users = users.OrderByDescending(user => user.Make);
+                    break;
+                case "Model":
+                    users = users.OrderBy(user => user.Model);
+                    break;
+                case "Model_desc":
+                    users = users.OrderByDescending(user => user.Model);
+                    break;
+                case "RegistrationNumber":
+                    users = users.OrderBy(user => user.RegistrationNumber);
+                    break;
+                case "RegistrationNumber_desc":
+                    users = users.OrderByDescending(user => user.RegistrationNumber);
+                    break;
+                default:
+                    users = users.OrderBy(user => user.FirstName);
+                    break;
+            }
+            return View(users.ToList());
         }
 
         public ActionResult About()

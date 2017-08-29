@@ -12,17 +12,53 @@
     </div>
 </div>
 
-<h2>History</h2>
+<h2>Historia przeglądów</h2>
+@using (Html.BeginForm())
+{
+    <p>
+        Szukaj: @Html.TextBox("SearchString")
+        <input type="submit" value="Szukaj" />
+    </p>
+}
+@if (Model.Count() > 0)
+{
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.InspectionDate)
+            @Html.ActionLink("Id Samochodu", "History",
+                new { carId = Model.First().CarId, userId = Model.First().UserId, sortOrder = ViewBag.InspectionDateSortParm })
+            @if (ViewBag.SortOrder == null)
+            {
+                <span class="glyphicon glyphicon-sort-by-attributes"></span>
+            }
+            else if (ViewBag.SortOrder == "InspectionDate_desc")
+            {
+                <span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
+            }
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Comments)
+            @Html.ActionLink("Komentarz", "History",
+                new { carId = Model.First().CarId, userId = Model.First().UserId, sortOrder = ViewBag.CommentsSortParm })
+            @if (ViewBag.SortOrder == "Comments")
+            {
+                <span class="glyphicon glyphicon-sort-by-attributes"></span>
+            }
+            else if (ViewBag.SortOrder == "Comments_desc")
+            {
+                <span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
+            }
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.NextInspectionYears)
+            @Html.ActionLink("Okres przeglądu", "History",
+                new { carId = Model.First().CarId, userId = Model.First().UserId, sortOrder = ViewBag.NextInspectionYearsSortParm })
+            @if (ViewBag.SortOrder == "NextInspectionYears")
+            {
+                <span class="glyphicon glyphicon-sort-by-attributes"></span>
+            }
+            else if (ViewBag.SortOrder == "NextInspectionYears_desc")
+            {
+                <span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
+            }
         </th>
         <th></th>
     </tr>
@@ -45,6 +81,11 @@
         </tr>
     }
 </table>
+}
+else
+{
+    <h3>Brak przeglądów</h3>
+}
 <hr />
 <p>
     @Html.ActionLink("Powrót", "Index","Home")

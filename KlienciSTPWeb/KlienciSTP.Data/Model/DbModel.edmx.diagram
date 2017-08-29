@@ -10,6 +10,13 @@
         <EntityTypeShape EntityType="DBKlienciSTPModel.User" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
         <AssociationConnector Association="DBKlienciSTPModel.FK_Car_Inspection" ManuallyRouted="false" />
         <AssociationConnector Association="DBKlienciSTPModel.FK_User_Car" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DBKlienciSTPModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="6.5" />
+        <EntityTypeShape EntityType="DBKlienciSTPModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="5" />
+        <EntityTypeShape EntityType="DBKlienciSTPModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="7.75" />
+        <EntityTypeShape EntityType="DBKlienciSTPModel.AspNetUsers" Width="1.5" PointX="3" PointY="5.375" />
+        <AssociationConnector Association="DBKlienciSTPModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="DBKlienciSTPModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="DBKlienciSTPModel.AspNetUserRoles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
